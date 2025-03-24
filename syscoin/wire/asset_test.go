@@ -100,3 +100,23 @@ func TestSyscoinBurnToEthereumType_SerializeDeserialize(t *testing.T) {
 		t.Errorf("Mismatch after deserialize. Got %+v, want %+v", deserialized, original)
 	}
 }
+func TestAssetType_SerializeDeserialize(t *testing.T) {
+    original := AssetType{
+        Symbol:    []byte("SYS"),
+        Precision: 8,
+    }
+
+    var buf bytes.Buffer
+    if err := original.Serialize(&buf); err != nil {
+        t.Fatalf("Serialize failed: %v", err)
+    }
+
+    var deserialized AssetType
+    if err := deserialized.Deserialize(&buf); err != nil {
+        t.Fatalf("Deserialize failed: %v", err)
+    }
+
+    if !bytes.Equal(original.Symbol, deserialized.Symbol) || original.Precision != deserialized.Precision {
+        t.Errorf("Mismatch after deserialize. Got %+v, want %+v", deserialized, original)
+    }
+}

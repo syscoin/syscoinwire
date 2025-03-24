@@ -376,3 +376,34 @@ func (a *SyscoinBurnToEthereumType) Serialize(w io.Writer) error {
     return nil
 }
 
+func (a *AssetType) Serialize(w io.Writer) error {
+    // Serialize Symbol
+    if err := wire.WriteVarBytes(w, 0, a.Symbol); err != nil {
+        return err
+    }
+
+    // Serialize Precision
+    if err := binarySerializer.PutUint8(w, a.Precision); err != nil {
+        return err
+    }
+
+    return nil
+}
+
+func (a *AssetType) Deserialize(r io.Reader) error {
+    var err error
+
+    // Deserialize Symbol
+    a.Symbol, err = wire.ReadVarBytes(r, 0, MAX_GUID_LENGTH, "Symbol")
+    if err != nil {
+        return err
+    }
+
+    // Deserialize Precision
+    a.Precision, err = binarySerializer.Uint8(r)
+    if err != nil {
+        return err
+    }
+
+    return nil
+}
