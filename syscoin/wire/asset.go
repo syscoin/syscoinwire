@@ -24,38 +24,12 @@ type AssetOutType struct {
 type AssetAllocationType struct {
     VoutAssets []AssetOutType
 }
-type NotaryDetailsType struct {
-    EndPoint string        `json:"endPoint,omitempty"`
-    InstantTransfers uint8 `json:"instantTransfers,omitempty"`
-    HDRequired uint8       `json:"HDRequired,omitempty"`
-}
-type AuxFeesType struct {
-    Bound int64    `json:"bound,omitempty"`
-    Percent uint16 `json:"percent,omitempty"`
-}
-type AuxFeeDetailsType struct {
-    AuxFeeKeyID []byte    `json:"auxFeeKeyID,omitempty"`
-    AuxFees []AuxFeesType `json:"auxFees,omitempty"`
-}
 type AssetType struct {
-    Allocation AssetAllocationType
     Contract []byte
-    PrevContract []byte
     Symbol []byte
-    PubData []byte
-    PrevPubData []byte
-    NotaryKeyID []byte
-    PrevNotaryKeyID []byte
-    NotaryDetails NotaryDetailsType
-    PrevNotaryDetails NotaryDetailsType
-    AuxFeeDetails AuxFeeDetailsType
-    PrevAuxFeeDetails AuxFeeDetailsType
     TotalSupply int64
     MaxSupply int64
     Precision uint8
-    UpdateCapabilityFlags uint8
-    PrevUpdateCapabilityFlags uint8
-    UpdateFlags uint8
 }
 type MintSyscoinType struct {
     Allocation AssetAllocationType
